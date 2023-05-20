@@ -1,0 +1,107 @@
+body {
+    background-color: rgb(255, 245, 234);
+    font-family: "Helvetica Neue", 'Helvetica', 'Arial', "Lucida Grande", sans-serif;
+}
+h1 {
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+}
+.date {
+    margin: 0 auto;
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: table;
+}
+.fixed_date {
+    top: 0%;
+    left: 50%;
+    text-align: center;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 8px;
+    position: fixed;
+    transform: translate(-25%, 0);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.message {
+    border-radius: 10px;
+    background-color: white;
+    width: 80%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.sender {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: dodgerblue;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.messageText {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.time {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    float: right;
+    color: gray;
+}
+#search_btn {
+    visibility: hidden;
+    top: 0%;
+    right: 0%;
+    width: 15%;
+    height: 30pt;
+    border-radius: 10px;
+    background-color: white;
+    position: fixed;
+}
+#search {
+    visibility: hidden;
+}
+#search_fld {
+    visibility: inherit;
+    font-size: 12pt;
+    top: 0%;
+    left: 0%;
+    width: 40%;
+    height: 20pt;
+    border-radius: 10px;
+    background-color: white;
+    position: fixed;
+}
+#number_messages {
+    visibility: inherit;
+    top: 30pt;
+    right: 0%;
+    position: fixed;
+    margin-right: 10px;
+    font-weight: bold;
+}
+#navigate_buttons {
+    visibility: inherit;
+    position: fixed;
+    top: 50pt;
+    right: 0%;
+    margin-right: 20px;
+}
+.nav_btn {
+    visibility: hidden;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 20pt;
+}
+#select_chat {
+    width: 15%;
+    position: fixed;
+    bottom: 0%;
+    right: 0%;
+}

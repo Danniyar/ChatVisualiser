@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Visualiser Tool</title>
+    <link href="./css/index.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <h1>Chat Visualiser</h1>
+    <div class="fixed_date" id="curDate">22.01.2022</div>
+    <button id="search_btn" onclick="searchBtnClicked()">Search</button>
+    <div id="search">
+        <input id="search_fld" onkeydown="search(event)">
+        <label id="number_messages"></label>
+        <div id="navigate_buttons">
+            <button class="nav_btn" id="up_btn" onclick="upPressed()">↑</button>
+            <button class="nav_btn" id="down_btn" onclick="downPressed()">↓</button>
+        </div>
+    </div>
+    <ul id="chat">
+
+    </ul>
+    <div id="select_chat">
+        <label for="file">Choose file to upload</label>
+        <input type="file" id="file" name="file" accept=".txt" onchange="fileSelected(event)"/>
+    </div>
+</body>
+</html>
+<script src="./javascript/main.js" defer></script>
