@@ -5,6 +5,7 @@ const searchField = document.getElementById('search_fld');
 const searchElms = document.getElementById('search');
 const selectChat = document.getElementById('select_chat');
 const dateRegex = /([0-9]+(\.[0-9]+)+), [0-9]+:[0-9]+ - /i;
+const dateRegexVar = /\[([0-9]+(\.[0-9]+)+), [0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]{1,3})?\] /i;
 const colors = ['crimson', 'red', 'deeppink', 'orangered', 'orange', 'gold', 'magenta', 'blueviolet', 'darkstateblue', 'blue', 'dodgerblue', 'limegreen'];
 var curColor = -1;
 var contacts = {};
@@ -17,6 +18,13 @@ var curNavigateIndex = -1;
 
 function readChat(text)
 {
+    elms = [];
+    contacts = {};
+    curDate = '';
+    curColor = -1;
+    var firstRegex = true;
+    if(dateRegexVar.test(text.slice(0,23)))
+        firstRegex = false;
     for(var i = 0; i < text.length; i++)
     {
         let day = text.slice(i,i+2);
@@ -38,7 +46,10 @@ function readChat(text)
             elms.push(dateElm);
         }
         let time = text.slice(i+12,i+17);
-        i += 20;
+        if(firstRegex)
+            i += 20;
+        else 
+            i += 22;
         let sender = '';
         while(i < text.length && text[i] != ':')
         {
@@ -48,10 +59,21 @@ function readChat(text)
         sender.trimEnd()
         i++;
         let message = "";
-        while(i < text.length && !dateRegex.test(text.slice(i,i+21)) )
+        if(firstRegex)
         {
-            message += text[i];
-            i++;
+            while(i < text.length && !dateRegex.test(text.slice(i,i+21)) )
+            {
+                message += text[i];
+                i++;
+            }
+        }
+        else 
+        {
+            while(i < text.length && !dateRegexVar.test(text.slice(i,i+23)) )
+            {
+                message += text[i];
+                i++;
+            }
         }
         
         let messageElm = document.createElement('li');
@@ -85,13 +107,11 @@ function readChat(text)
         elms.push(messageElm);
     }
     chatLoad(elms.length-1);
-    document.addEventListener("scrollend", (event) => {
-        output.innerHTML = `Document scrollend event fired!`;
-      });
 }
 
 function chatLoad(index)
 {
+    chat.innerHTML = "";
     var startIndex = index-100 < 0 ? 0 : index-100;
     for(var i = startIndex; i <= index; i++)
         chat.appendChild(elms[i]);
@@ -107,8 +127,9 @@ function chatUpdate(bottom)
     {
         var endIndex = endElmIndex+50 > elms.length-1 ? elms.length-1 : endElmIndex+50;
         var size = endIndex-endElmIndex;
-        for(var i = endElmIndex; i <= endIndex; i++)
+        for(var i = endElmIndex+1; i <= endIndex; i++)
             chat.append(elms[i]);
+        elms[endElmIndex].scrollIntoView({block:'end'});
         endElmIndex = endIndex;
         for(var i = startElmIndex; i < startElmIndex+size; i++)
             chat.removeChild(elms[i]);
@@ -120,6 +141,7 @@ function chatUpdate(bottom)
         var size = startElmIndex-startIndex;
         for(var i = startElmIndex-1; i >= startIndex; i--)
             chat.prepend(elms[i]);
+        elms[startElmIndex].scrollIntoView({block:'start'});
         startElmIndex = startIndex;
         for(var i = endElmIndex-size+1; i <= endElmIndex; i++)
             chat.removeChild(elms[i]);
@@ -242,7 +264,6 @@ function fileSelected(event)
 }
 
 function logFile (event) {
-    console.log('a');
 	let text = event.target.result;
 	readChat(text);
     searchBtn.style.visibility = 'visible';
