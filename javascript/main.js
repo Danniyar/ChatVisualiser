@@ -150,7 +150,7 @@ function chatUpdate(bottom)
 function loadMessage(index)
 {
     if(index >= startElmIndex && index <= endElmIndex)
-        elms[index].scrollIntoView(true, {block:'center'} );
+        elms[index].scrollIntoView({block:'center'} );
     else 
     {
         index = parseInt(index);
@@ -162,7 +162,7 @@ function loadMessage(index)
             chat.append(elms[i]);
         startElmIndex = startIndex;
         endElmIndex = endIndex;
-        elms[index].scrollIntoView(true, {block:'center'} );
+        elms[index].scrollIntoView({block:'center'} );
     }
 }
 
