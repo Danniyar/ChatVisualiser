@@ -129,7 +129,7 @@ function chatUpdate(bottom)
         var size = endIndex-endElmIndex;
         for(var i = endElmIndex+1; i <= endIndex; i++)
             chat.append(elms[i]);
-        elms[endElmIndex].scrollIntoView({block:'end'});
+        elms[endElmIndex].scrollIntoView(true, {block:'end'});
         endElmIndex = endIndex;
         for(var i = startElmIndex; i < startElmIndex+size; i++)
             chat.removeChild(elms[i]);
@@ -141,7 +141,7 @@ function chatUpdate(bottom)
         var size = startElmIndex-startIndex;
         for(var i = startElmIndex-1; i >= startIndex; i--)
             chat.prepend(elms[i]);
-        elms[startElmIndex].scrollIntoView({block:'start'});
+        elms[startElmIndex].scrollIntoView(true, {block:'start'});
         startElmIndex = startIndex;
         for(var i = endElmIndex-size+1; i <= endElmIndex; i++)
             chat.removeChild(elms[i]);
@@ -152,7 +152,7 @@ function chatUpdate(bottom)
 function loadMessage(index)
 {
     if(index >= startElmIndex && index <= endElmIndex)
-        elms[index].scrollIntoView( {block:'center'} );
+        elms[index].scrollIntoView(true, {block:'center'} );
     else 
     {
         index = parseInt(index);
@@ -164,7 +164,7 @@ function loadMessage(index)
             chat.append(elms[i]);
         startElmIndex = startIndex;
         endElmIndex = endIndex;
-        elms[index].scrollIntoView( {block:'center'} );
+        elms[index].scrollIntoView(true, {block:'center'} );
     }
 }
 
